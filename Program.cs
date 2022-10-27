@@ -86,51 +86,59 @@ public class cardholder
         cardhold.Add(new cardholder( "Dawn", "Smith", "3490693153147110", 4826, 54.27));
 
 
-        Console.WriteLine("Welcome to Eos Banking");
-        string usernumber = "";
-        int userpin = 0;
         cardholder currentuser;
 
-        Console.WriteLine("Enter your UserNumber : ");
-
-        while (true)
+        void welcome()
         {
-            try
-            {
-                usernumber = Console.ReadLine();
-                currentuser = cardhold.FirstOrDefault(a => a.cardnum == usernumber);
-                if (currentuser != null) { break; }
-                else { Console.WriteLine("Invalid UserName , Try again ."); }
-            }
-            catch
-            {
-                Console.WriteLine("Invalid UserName , Try again .");
-            }
-        }
+            Console.WriteLine("Welcome to Eos Banking");
+            string usernumber = "";
+            int userpin = 0;
 
-        Console.WriteLine("Enter your Pin : ");
 
-        while (true)
-        {
-            try
+            Console.WriteLine("Enter your UserNumber : ");
+
+            while (true)
             {
-                userpin = int.Parse(Console.ReadLine());
-                if(userpin == currentuser.pin)
+                try
                 {
-                    Console.WriteLine("Access Granted");
-                    break;
+                    usernumber = Console.ReadLine();
+                    currentuser = cardhold.FirstOrDefault(a => a.cardnum == usernumber);
+                    if (currentuser != null) { break; }
+                    else { Console.WriteLine("Invalid UserName , Try again ."); }
                 }
-                else { Console.WriteLine("Invalid Pin , Try again ."); }
+                catch
+                {
+                    Console.WriteLine("Invalid UserName , Try again .");
+                }
             }
-            catch
+
+            Console.WriteLine("Enter your Pin : ");
+
+            while (true)
             {
-                Console.WriteLine("Invalid Pin , Try again .");
+                try
+                {
+                    userpin = int.Parse(Console.ReadLine());
+                    if (userpin == currentuser.pin)
+                    {
+                        Console.WriteLine("Access Granted");
+                        break;
+                    }
+                    else { Console.WriteLine("Invalid Pin , Try again ."); }
+                }
+                catch
+                {
+                    Console.WriteLine("Invalid Pin , Try again .");
+                }
             }
+
+            Console.WriteLine("Welcome " + currentuser.getfirstname());
+           
         }
 
-        Console.WriteLine("Welcome " + currentuser.getfirstname());
-        int opt = 0;
+        welcome();
 
+        int opt = 0;
         do
         {
             options();
@@ -148,8 +156,12 @@ public class cardholder
             else if (opt == 2) { withdraw(currentuser); }
             else if (opt == 3) { viewblc(currentuser); }
             else if (opt == 4) { changepin(currentuser); }
-            else if (opt == 5) { break; }
-            else { opt = 0;}
+            else if (opt == 5) {
+                Console.WriteLine("Thank you , Remainder : Dont go Broke ;)  /n/n ");
+                opt = 0;
+                welcome(); }
+
+            
 
         }
 
